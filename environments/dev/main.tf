@@ -12,7 +12,7 @@ provider "aws" {
 }
 
 module "web-cluster" {
-  source = "./modules/web-app-module"
+  source = "../../modules/web-app-module"
 
   server_port    = 8080
   ami            = "ami-08f5d9f4870fa3a73"

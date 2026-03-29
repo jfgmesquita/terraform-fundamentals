@@ -22,6 +22,10 @@ jobs:
     name: "Terraform Action"
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: environments/dev
+
     permissions:
       contents: read
       pull-requests: write
