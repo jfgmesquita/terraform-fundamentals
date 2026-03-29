@@ -5,6 +5,17 @@ on:
     branches:
       - main
   pull_request:
+  # Enables manual trigger from the GitHub Actions UI
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Terraform action to execute'
+        required: true
+        default: 'apply'
+        type: choice
+        options:
+          - apply
+          - destroy
 
 jobs:
   terraform:
@@ -72,6 +83,12 @@ jobs:
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
+      # Executes apply on push to main OR manual trigger with 'apply' selected
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'apply'))
         run: terraform apply -auto-approve
+        
+      # Executes destroy ONLY on manual trigger with 'destroy' selected
+      - name: Terraform Destroy
+        if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'destroy'
+        run: terraform destroy -auto-approve
