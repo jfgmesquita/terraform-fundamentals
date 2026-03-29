@@ -17,11 +17,11 @@ resource "aws_security_group" "instances" {
 }
 
 resource "aws_security_group_rule" "allow_http_inbound" {
-  type              = "ingress"
-  security_group_id = aws_security_group.instances.id
-  from_port         = var.server_port
-  to_port           = var.server_port
-  protocol          = "tcp"
+  type                     = "ingress"
+  security_group_id        = aws_security_group.instances.id
+  from_port                = var.server_port
+  to_port                  = var.server_port
+  protocol                 = "tcp"
   source_security_group_id = aws_security_group.alb.id
 }
 
