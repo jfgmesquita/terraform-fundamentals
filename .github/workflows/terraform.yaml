@@ -4,8 +4,13 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'README.md'
+      - '.gitignore'
   pull_request:
-  # Enables manual trigger from the GitHub Actions UI
+    paths-ignore:
+      - 'README.md'
+      - '.gitignore'
   workflow_dispatch:
     inputs:
       action:

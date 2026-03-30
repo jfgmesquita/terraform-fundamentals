@@ -38,18 +38,22 @@ This project utilises GitHub Actions to manage infrastructure changes safely:
 To deploy or test locally:
 
 1. Navigate to the target environment:
+
    ```bash
    cd environments/dev
    ```
 2. Initialise the working directory (downloads plugins and configures the S3 backend):
+
    ```bash
    terraform init
    ```
 3. Preview the infrastructure changes:
+
    ```bash
    terraform plan
    ```
 4. Provision the resources:
+
    ```bash
    terraform apply
    ```
