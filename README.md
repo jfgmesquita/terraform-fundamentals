@@ -58,6 +58,14 @@ To deploy or test locally:
 
 State files are strictly managed remotely enabling team collaboration and preventing race conditions. The backend uses an encrypted **Amazon S3 Bucket** to store the `terraform.tfstate` and an **Amazon DynamoDB Table** for state locking.
 
-***
+## Backend Configuration Note
 
-###### S3 bucket names are globally unique.
+The example backend configuration in this repository uses a placeholder S3 bucket name (for example, `tf-state-2026`). **Before running `terraform init` or `terraform apply`, this bucket name bust me replaced with one that is globally unique** and ensure that the same name is used consistently in:
+
+- The S3 bucket and DynamoDB table definitions under `global/`
+
+- Any `backend "s3"` blocks in each environment under `environments/`
+
+- Any CI/CD workflow configuration that passes backend settings to Terraform
+
+***
